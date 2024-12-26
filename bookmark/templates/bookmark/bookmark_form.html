@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if bookmark %}Edit Bookmark{% else %}Add Bookmark{% endif %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .cancel {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007BFF;
+        }
+        .cancel:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>{% if bookmark %}Edit Bookmark{% else %}Add Bookmark{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="{{ bookmark.title|default:'' }}" required>
+        
+        <label for="url">URL</label>
+        <input type="url" id="url" name="url" value="{{ bookmark.url|default:'' }}" required>
+        
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{ bookmark.description|default:'' }}</textarea>
+        
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'bookmark-list' %}" class="cancel">Cancel</a>
+</body>
+</html>

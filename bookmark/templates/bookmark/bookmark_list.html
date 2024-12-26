@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .bookmark-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .bookmark-list li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .actions {
+            margin-top: 10px;
+        }
+        .actions a {
+            margin-right: 10px;
+        }
+        .add-bookmark {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 150px;
+        }
+        .add-bookmark:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bookmark List</h1>
+    <a href="{% url 'bookmark-create' %}" class="add-bookmark">Add New Bookmark</a>
+    <ul class="bookmark-list">
+        {% for bookmark in bookmarks %}
+            <li>
+                <strong>{{ bookmark.title }}</strong> - <a href="{{ bookmark.url }}" target="_blank">Visit</a>
+                <p>{{ bookmark.description }}</p>
+                <div class="actions">
+                    <a href="{% url 'bookmark-update' bookmark.pk %}">Edit</a>
+                    <a href="{% url 'bookmark-delete' bookmark.pk %}">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

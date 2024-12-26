@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Bookmark</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      .confirm {
+        max-width: 400px;
+        margin: 20px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      button {
+        background: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #a71d2a;
+      }
+      .cancel {
+        display: block;
+        margin-top: 15px;
+        color: #007bff;
+      }
+      .cancel:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Delete Bookmark</h1>
+    <div class="confirm">
+      <p>Are you sure you want to delete "{{ bookmark.title }}"?</p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+      </form>
+      <a href="{% url 'bookmark-list' %}" class="cancel">Cancel</a>
+    </div>
+  </body>
+</html>
